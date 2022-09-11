@@ -1,7 +1,13 @@
+import "../styles/LoginView.css";
+
+import Title from "../components/Title";
+
 export default function LoginView() {
 	return (
 		<>
-			<h1>Hola desde Login</h1>
+			<div id="login-container">
+				<Title>Login</Title>
+			</div>
 		</>
 	);
 }

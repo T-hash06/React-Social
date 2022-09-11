@@ -1,0 +1,16 @@
+.title-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	height: 100%;
+	width: 100%;
+
+	background-color: var(--main);
+	border-bottom: 1px solid var(--light-5);
+}
+
+.title-container .text {
+	font-weight: 400;
+	text-transform: capitalize;
+}
