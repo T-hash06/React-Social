@@ -1,0 +1,11 @@
+#main-app-container {
+	background-color: var(--main-color);
+
+	display: grid;
+	place-items: center;
+
+	width: 100vw;
+	height: 100vh;
+
+	color: #fff;
+}
