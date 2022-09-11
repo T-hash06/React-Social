@@ -2,6 +2,16 @@
 
 :root {
 	--main-color: #5e60ce;
+	--main: var(--main-color);
+
+	--dark-1: #6930c3;
+	--dark-2: #7400b8;
+
+	--light-1: #5390d9;
+	--light-2: #4ea8de;
+	--light-3: #48bfe3;
+	--light-4: #64dfdf;
+	--light-5: #caf0f8;
 }
 
 * {

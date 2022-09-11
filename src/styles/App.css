@@ -1,5 +1,5 @@
 #main-app-container {
-	background-color: var(--main-color);
+	background-color: var(--main);
 
 	display: grid;
 	place-items: center;
