@@ -5,3 +5,16 @@
 	display: grid;
 	grid-template-rows: var(--title-height) auto 200px;
 }
+
+#login-container .inputs-section {
+	display: flex;
+	flex-wrap: wrap;
+
+	justify-content: center;
+	align-content: flex-start;
+}
+
+#login-container .inputs-section .text-input {
+	margin-top: 40px;
+	width: 70%;
+}

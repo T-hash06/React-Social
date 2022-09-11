@@ -13,7 +13,19 @@
 	--light-4: #64dfdf;
 	--light-5: #caf0f8;
 
+	--black: #303030;
+
+	--grey: #5c5c5c;
+	--light-grey: #b8b8b8;
+
+	--back: var(--light-grey);
+
 	--title-height: 100px;
+	--inputs-height: 48px;
+
+	--radius: 6px;
+
+	font-size: 16px;
 }
 
 * {
