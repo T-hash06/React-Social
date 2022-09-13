@@ -9,8 +9,6 @@ export default function HomeView() {
 	const auth = useStore(AuthStore);
 
 	useEffect(() => {
-		console.log("Hola");
-
 		if (!auth) {
 			navigate("/login");
 			console.log("Hola");
