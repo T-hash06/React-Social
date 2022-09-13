@@ -15,6 +15,7 @@ export default function LoginView() {
 	const handleUsername = (event: ChangeEvent<HTMLInputElement>) => {
 		setUsername(event.target.value);
 	};
+
 	const handlePassword = (event: ChangeEvent<HTMLInputElement>) => {
 		setPassword(event.target.value);
 	};
@@ -22,6 +23,7 @@ export default function LoginView() {
 	const handleLogin = () => {
 		alert("Unimplemented");
 	};
+
 	const handleRegister = () => {
 		navigate("/register");
 	};

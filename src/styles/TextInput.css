@@ -1,5 +1,5 @@
 .input-container {
-	--back-color: var(--light-grey);
+	--back-color: var(--white);
 	--border-color: var(--grey);
 	--active-color: var(--main);
 	--label-color: var(--grey);
