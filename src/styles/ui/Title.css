@@ -8,9 +8,9 @@
 
 	background-color: var(--main);
 	border-bottom: 1px solid var(--light-5);
-}
 
-.title-container .text {
-	font-weight: 400;
-	text-transform: capitalize;
+	.text {
+		font-weight: 400;
+		text-transform: capitalize;
+	}
 }

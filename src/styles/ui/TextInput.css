@@ -15,54 +15,56 @@
 	border-radius: var(--radius);
 
 	position: relative;
-}
 
-.input-container .input {
-	border: none;
-	outline: none;
+	.input {
+		border: none;
+		outline: none;
 
-	height: var(--inputs-height);
-	width: 100%;
-	height: 100%;
+		height: var(--inputs-height);
+		width: 100%;
+		height: 100%;
 
-	border-radius: var(--radius);
-	text-indent: 16px;
+		border-radius: var(--radius);
+		text-indent: 16px;
 
-	font-size: var(--font-size);
+		font-size: var(--font-size);
 
-	background-color: var(--back-color);
-	outline: 1px solid var(--border-color);
+		background-color: var(--back-color);
+		outline: 1px solid var(--border-color);
 
-	color: var(--black);
-}
+		color: var(--black);
+	}
 
-.input-container .label {
-	pointer-events: none;
-	position: absolute;
-	left: 16px;
-	top: calc(48% - (var(--font-size) / 2));
+	.label {
+		pointer-events: none;
+		position: absolute;
+		left: 16px;
+		top: calc(48% - (var(--font-size) / 2));
 
-	color: var(--label-color);
-	background-color: var(--back-color);
+		color: var(--label-color);
+		background-color: var(--back-color);
 
-	transition-duration: 300ms;
-	font-size: var(--font-size);
+		transition-duration: 300ms;
+		font-size: var(--font-size);
 
-	height: var(--font-size);
-}
+		height: var(--font-size);
+	}
 
-.input-container.filled .label {
-	color: var(--label-color);
-	top: calc(-1 * var(--font-size) * 0.7);
-	padding: 0px 10px;
-}
+	&.filled .label {
+		color: var(--label-color);
+		top: calc(-1 * var(--font-size) * 0.7);
+		padding: 0px 10px;
+	}
 
-.input-container:focus-within .input {
-	outline: 2px solid var(--active-color);
-}
+	&:focus-within {
+		.input {
+			outline: 2px solid var(--active-color);
+		}
 
-.input-container:focus-within .label {
-	color: var(--active-color);
-	top: calc(-1 * var(--font-size) * 0.7);
-	padding: 0px 10px;
+		.label {
+			color: var(--active-color);
+			top: calc(-1 * var(--font-size) * 0.7);
+			padding: 0px 10px;
+		}
+	}
 }

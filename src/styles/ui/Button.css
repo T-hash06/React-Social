@@ -19,11 +19,11 @@
 	font-weight: 400;
 
 	cursor: pointer;
-}
 
-.button-container.main {
-	background-color: var(--main-color);
-	color: var(--sec-color);
+	&.main {
+		background-color: var(--main-color);
+		color: var(--sec-color);
 
-	border: none;
+		border: none;
+	}
 }
