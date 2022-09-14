@@ -1,4 +1,4 @@
-import "../styles/RegisterView.css";
+import "../styles/views/RegisterView.css";
 
 export default function RegisterView() {
 	return (

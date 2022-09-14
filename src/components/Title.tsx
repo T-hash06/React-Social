@@ -1,4 +1,4 @@
-import "../styles/Title.css";
+import "../styles/ui/Title.css";
 
 interface props {
 	children: string;

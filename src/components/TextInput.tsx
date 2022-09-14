@@ -1,4 +1,4 @@
-import "../styles/TextInput.css";
+import "../styles/ui/TextInput.css";
 
 import { ChangeEvent, useState } from "react";
 

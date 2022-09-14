@@ -1,6 +1,8 @@
+import "../styles/views/NotFoundView.css";
+
 import { useLocation, useNavigate } from "react-router-dom";
+
 import Button from "../components/Button";
-import "../styles/NotFoundView.css";
 
 export default function () {
 	const navigate = useNavigate();

@@ -1,11 +1,11 @@
-import "../styles/LoginView.css";
+import "../styles/views/LoginView.css";
+
+import { useNavigate } from "react-router-dom";
+import { ChangeEvent, useState } from "react";
 
 import TextInput from "../components/TextInput";
 import Button from "../components/Button";
 import Title from "../components/Title";
-
-import { ChangeEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export default function LoginView() {
 	const [username, setUsername] = useState("");
