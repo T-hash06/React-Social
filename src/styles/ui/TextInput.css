@@ -4,6 +4,7 @@
 	--active-color: var(--main);
 	--label-color: var(--grey);
 	--font-size: 16px;
+	--icon-size: calc(var(--font-size) * 1.5);
 
 	display: flex;
 	justify-content: center;
@@ -15,6 +16,16 @@
 	border-radius: var(--radius);
 
 	position: relative;
+	background-color: var(--back-color);
+	outline: 1px solid var(--border-color);
+
+	.icon {
+		color: var(--border-color);
+		font-size: var(--icon-size);
+		width: calc(var(--icon-size) * 2);
+
+		transition-duration: 200ms;
+	}
 
 	.input {
 		border: none;
@@ -25,12 +36,9 @@
 		height: 100%;
 
 		border-radius: var(--radius);
-		text-indent: 16px;
 
 		font-size: var(--font-size);
-
-		background-color: var(--back-color);
-		outline: 1px solid var(--border-color);
+		text-indent: 16px;
 
 		color: var(--black);
 	}
@@ -38,11 +46,12 @@
 	.label {
 		pointer-events: none;
 		position: absolute;
-		left: 16px;
+		left: 20px;
 		top: calc(48% - (var(--font-size) / 2));
 
 		color: var(--label-color);
 		background-color: var(--back-color);
+		border-radius: 30%;
 
 		transition-duration: 300ms;
 		font-size: var(--font-size);
@@ -50,21 +59,37 @@
 		height: var(--font-size);
 	}
 
+	&.iconned {
+		.label {
+			left: calc(var(--icon-size) * 2);
+		}
+
+		.input {
+			text-indent: 6px;
+		}
+	}
+
 	&.filled .label {
 		color: var(--label-color);
 		top: calc(-1 * var(--font-size) * 0.7);
 		padding: 0px 10px;
+
+		left: 20px;
 	}
 
 	&:focus-within {
-		.input {
-			outline: 2px solid var(--active-color);
+		outline: 2px solid var(--active-color);
+
+		.icon {
+			color: var(--active-color);
 		}
 
 		.label {
 			color: var(--active-color);
 			top: calc(-1 * var(--font-size) * 0.7);
 			padding: 0px 10px;
+
+			left: 20px;
 		}
 	}
 }

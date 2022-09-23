@@ -2,6 +2,7 @@ import "../styles/views/LoginView.css";
 
 import { useNavigate } from "react-router-dom";
 import { ChangeEvent, useState } from "react";
+import { FaUser, FaKey } from "react-icons/fa";
 
 import TextInput from "../components/TextInput";
 import Button from "../components/Button";
@@ -37,11 +38,13 @@ export default function LoginView() {
 						className="text-input"
 						label="username"
 						onChange={handleUsername}
+						Icon={FaUser}
 					/>
 					<TextInput
 						className="text-input"
 						label="password"
 						onChange={handlePassword}
+						Icon={FaKey}
 					/>
 				</section>
 				<section className="buttons-section">

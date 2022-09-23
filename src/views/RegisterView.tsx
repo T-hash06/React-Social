@@ -1,5 +1,6 @@
 import "../styles/views/RegisterView.css";
 
+import { FaKey, FaEnvelope, FaRegAddressCard, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { ChangeEvent, useState } from "react";
 
@@ -48,21 +49,25 @@ export default function RegisterView() {
 						onChange={handleChanges}
 						label="name"
 						className="text-input"
+						Icon={FaRegAddressCard}
 					/>
 					<TextInput
 						onChange={handleChanges}
 						label="email"
 						className="text-input"
+						Icon={FaEnvelope}
 					/>
 					<TextInput
 						onChange={handleChanges}
 						label="username"
 						className="text-input"
+						Icon={FaUser}
 					/>
 					<TextInput
 						onChange={handleChanges}
 						label="password"
 						className="text-input"
+						Icon={FaKey}
 					/>
 				</div>
 				<div className="buttons-container">
