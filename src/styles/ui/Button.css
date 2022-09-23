@@ -1,7 +1,7 @@
 .button-container {
 	--main-color: var(--main);
 	--text-color: var(--white);
-	--back-color: var(--back);
+	--back-color: var(--white);
 
 	border: none;
 	outline: none;
@@ -17,6 +17,7 @@
 
 	font-size: 1.1rem;
 	font-weight: 400;
+	text-transform: capitalize;
 
 	cursor: pointer;
 

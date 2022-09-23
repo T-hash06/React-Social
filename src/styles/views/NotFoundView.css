@@ -53,8 +53,11 @@
 		}
 
 		.redirect-button {
+			--back-color: var(--white);
+
 			width: 70%;
 			max-width: 320px;
+
 			align-self: flex-start;
 			margin-top: 10px;
 		}

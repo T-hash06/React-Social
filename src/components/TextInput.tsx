@@ -3,7 +3,7 @@ import "../styles/ui/TextInput.css";
 import { ChangeEvent, useState } from "react";
 
 interface props {
-	onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+	onChange: (event: ChangeEvent<HTMLInputElement>, label?: string) => void;
 	className?: string;
 	label: string;
 }
@@ -14,7 +14,7 @@ export default function TextInput({ onChange, className, label }: props) {
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
 		setFilled(!!value);
-		onChange(event);
+		onChange(event, label);
 	};
 
 	return (
