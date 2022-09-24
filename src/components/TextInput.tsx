@@ -1,6 +1,6 @@
 import "../styles/ui/TextInput.css";
 
-import React, { ChangeEvent, ReactElement, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { IconType } from "react-icons";
 
 interface props {

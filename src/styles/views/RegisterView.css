@@ -5,7 +5,7 @@
 	height: 100%;
 
 	display: grid;
-	grid-template-rows: var(--title-height) auto 450px;
+	grid-template-rows: var(--title-height) auto 250px;
 
 	.inputs-container {
 		display: flex;
