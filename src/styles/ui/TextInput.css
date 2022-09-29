@@ -41,6 +41,7 @@
 		text-indent: 16px;
 
 		color: var(--black);
+		background-color: var(--white);
 	}
 
 	.label {
@@ -57,6 +58,16 @@
 		font-size: var(--font-size);
 
 		height: var(--font-size);
+	}
+
+	.error-label {
+		color: var(--error);
+		position: absolute;
+
+		left: 6px;
+		top: calc(100% + 4px);
+
+		animation: linear 120ms spawn;
 	}
 
 	&.iconned {
@@ -77,6 +88,15 @@
 		left: 20px;
 	}
 
+	&.error {
+		outline: 2px solid var(--error);
+
+		.label,
+		.icon {
+			color: var(--error);
+		}
+	}
+
 	&:focus-within {
 		outline: 2px solid var(--active-color);
 
@@ -91,5 +111,32 @@
 
 			left: 20px;
 		}
+
+		&.error {
+			outline: 2px solid var(--error);
+
+			.label,
+			.icon {
+				color: var(--error);
+			}
+		}
+	}
+}
+
+@keyframes spawn {
+	0% {
+		left: 0px;
+	}
+	25% {
+		left: 5px;
+	}
+	50% {
+		left: -5px;
+	}
+	75% {
+		left: 5px;
+	}
+	100% {
+		left: 0px;
 	}
 }
