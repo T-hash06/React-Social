@@ -1,10 +1,12 @@
 import "../styles/ui/TextInput.css";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FocusEvent, useState } from "react";
 import { IconType } from "react-icons";
+
 import classnames from "classnames";
 
 type InputType = "text" | "password" | "email";
+type FocusType = "focus" | "blur";
 
 interface props {
 	onChange: (event: ChangeEvent<HTMLInputElement>, label?: string) => void;
@@ -38,11 +40,24 @@ export default function TextInput(props: props) {
 		props.onChange(event, props.label);
 	};
 
+	const handleFocus = (event: FocusEvent<HTMLInputElement>) => {
+		const focusType = event.type as FocusType;
+		const value = event.target.value;
+
+		if (focusType === "focus") {
+			clearError();
+		} else {
+			validate(value, props.type || "text");
+		}
+	};
+
+	const clearError = () => {
+		if (props.setError !== undefined) props.setError("", props.label);
+	};
+
 	const validate = (value: string, type: InputType) => {
 		if (type === "text" || props.setError === undefined) return;
-		if (value.length === 0) {
-			return props.setError("", props.label);
-		}
+		if (value.length === 0) return clearError();
 
 		if (type === "email") {
 			if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
@@ -56,7 +71,7 @@ export default function TextInput(props: props) {
 			}
 		}
 
-		return props.setError("", props.label);
+		return clearError();
 	};
 
 	return (
@@ -70,7 +85,13 @@ export default function TextInput(props: props) {
 				})}
 			>
 				<Icon Icon={props.Icon} />
-				<input className="input" type="text" onChange={handleChange} />
+				<input
+					className="input"
+					type="text"
+					onChange={handleChange}
+					onFocus={handleFocus}
+					onBlur={handleFocus}
+				/>
 				<label className="label">{props.label}</label>
 				<ErrorLabel error={props.error} />
 			</div>
