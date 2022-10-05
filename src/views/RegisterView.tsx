@@ -43,12 +43,51 @@ export default function RegisterView() {
 		setErrors({ ...errors, [label!]: error });
 	};
 
-	const handleRegister = () => {
+	const handleRegister = async () => {
+		const withEmpty = checkEmpty();
+		const withErrors = checkErrors();
+
+		if (withErrors || withEmpty) return;
+
 		alert("Unimplemented");
 	};
 
 	const handleLogin = () => {
 		navigate("/login");
+	};
+
+	const checkEmpty = () => {
+		const emptyValues = new Map();
+		const mapValues = new Map(Object.entries(values));
+
+		mapValues.forEach((value, key) => {
+			if (value === "") {
+				emptyValues.set(key, "Required");
+			}
+		});
+
+		if (emptyValues.size != 0) {
+			const objectValues = Object.fromEntries(emptyValues);
+			setErrors({ ...errors, ...objectValues });
+
+			return true;
+		}
+
+		return false;
+	};
+
+	const checkErrors = (): boolean => {
+		const mapErrors = new Map(Object.entries(errors));
+		let withErrors = false;
+
+		mapErrors.forEach((value, _) => {
+			if (value !== "") {
+				withErrors = true;
+				return;
+			}
+		});
+
+		return withErrors;
 	};
 
 	return (
@@ -61,6 +100,8 @@ export default function RegisterView() {
 						label="name"
 						className="text-input"
 						Icon={FaRegAddressCard}
+						error={errors.name}
+						setError={handleErrors}
 					/>
 					<TextInput
 						onChange={handleChanges}
@@ -76,6 +117,8 @@ export default function RegisterView() {
 						label="username"
 						className="text-input"
 						Icon={FaUser}
+						error={errors.username}
+						setError={handleErrors}
 					/>
 					<TextInput
 						onChange={handleChanges}
