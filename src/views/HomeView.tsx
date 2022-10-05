@@ -1,17 +1,17 @@
-import { useStore } from "@nanostores/react";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { auth as AuthStore } from "../stores/Auth";
+import { useStore } from '@nanostores/react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { auth as AuthStore } from '../stores/Auth';
 
-export default function HomeView() {
+export default function HomeView(): JSX.Element {
 	const navigate = useNavigate();
 
 	const auth = useStore(AuthStore);
 
 	useEffect(() => {
 		if (!auth) {
-			navigate("/login");
-			console.log("Hola");
+			navigate('/login');
+			console.log('Hola');
 		}
 	}, [auth]);
 

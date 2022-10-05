@@ -1,4 +1,4 @@
-import "../styles/ui/Button.css";
+import '../styles/ui/Button.css';
 
 interface props {
 	onClick: () => void;
@@ -7,13 +7,11 @@ interface props {
 	main?: boolean;
 }
 
-export default function Button({ onClick, children, className, main }: props) {
+export default function Button({ onClick, children, className, main }: props): JSX.Element {
 	return (
 		<>
 			<button
-				className={`button-container ${className} ${
-					main ? "main" : ""
-				}`}
+				className={`button-container ${className} ${main !== undefined ? 'main' : ''}`}
 				onClick={onClick}
 			>
 				{children}
