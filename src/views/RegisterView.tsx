@@ -4,9 +4,12 @@ import { FaKey, FaEnvelope, FaRegAddressCard, FaUser } from 'react-icons/fa';
 import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import axios, { AxiosError } from 'axios';
+
 import TextInput from '../components/TextInput';
 import Button from '../components/Button';
 import Title from '../components/Title';
+import { spawnNotification } from '../stores/Notification';
 
 interface inputs {
 	name: string;
@@ -46,11 +49,40 @@ export default function RegisterView(): JSX.Element {
 
 		if (withErrors || withEmpty) return;
 
-		alert('Unimplemented');
+		void createUser();
 	};
 
 	const handleLogin = (): void => {
 		navigate('/login');
+	};
+
+	const createUser = async (): Promise<void> => {
+		const API = import.meta.env.VITE_API_URL;
+
+		try {
+			await axios.post(`${API}/users`, values);
+
+			spawnNotification(`User ${values.username} created!`);
+			navigate('/login');
+		} catch (error: any) {
+			const axiosError: AxiosError = error;
+
+			if (axiosError.response === undefined) return;
+
+			if (axiosError.response.status === 409) {
+				const conflictFields = axiosError.response.data as string[];
+				const mapErrors = new Map();
+
+				conflictFields.forEach((field) => {
+					mapErrors.set(field, 'Already exists!');
+				});
+
+				const newErrors = Object.fromEntries(mapErrors);
+				setErrors({ ...errors, ...newErrors });
+			}
+
+			spawnNotification('Server error');
+		}
 	};
 
 	const checkEmpty = (): boolean => {
