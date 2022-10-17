@@ -123,7 +123,7 @@ export default function RegisterView(): JSX.Element {
 		<>
 			<div id='register-container'>
 				<Title>Register</Title>
-				<div className='inputs-container'>
+				<section className='inputs-container'>
 					<TextInput
 						onChange={handleChanges}
 						label='name'
@@ -158,15 +158,15 @@ export default function RegisterView(): JSX.Element {
 						setError={handleErrors}
 						type='password'
 					/>
-				</div>
-				<div className='buttons-container'>
+				</section>
+				<section className='buttons-container'>
 					<Button onClick={handleRegister} className='button' main>
 						register
 					</Button>
 					<Button onClick={handleLogin} className='button'>
 						login
 					</Button>
-				</div>
+				</section>
 			</div>
 		</>
 	);

@@ -70,6 +70,23 @@
 		animation: linear 120ms spawn;
 	}
 
+	.eye-icon {
+		height: 100%;
+		aspect-ratio: 1/1;
+
+		border: none;
+		outline: none;
+
+		font-size: 1.5em;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		color: var(--border-color);
+		background-color: var(--back-color);
+	}
+
 	&.iconned {
 		.label {
 			left: calc(var(--icon-size) * 2);

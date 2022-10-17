@@ -2,6 +2,7 @@ import '../styles/ui/TextInput.css';
 
 import { ChangeEvent, FocusEvent, useState } from 'react';
 import { IconType } from 'react-icons';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 import classnames from 'classnames';
 
@@ -17,6 +18,13 @@ interface props {
 	type?: InputType;
 	label: string;
 }
+
+interface ShowIconProps {
+	type?: InputType;
+	hidden: boolean;
+	onClick: () => void;
+}
+
 function Icon({ Icon }: { Icon?: IconType }): JSX.Element {
 	if (Icon !== undefined) return <Icon className='icon'></Icon>;
 
@@ -30,8 +38,22 @@ function ErrorLabel({ error }: { error?: string }): JSX.Element {
 	return <></>;
 }
 
+function ShowIcon({ type, hidden, onClick }: ShowIconProps): JSX.Element {
+	if (type === 'password')
+		return (
+			<>
+				<button className={classnames('eye-icon', { hidden })} onClick={onClick}>
+					{hidden ? <FaEyeSlash /> : <FaEye />}
+				</button>
+			</>
+		);
+
+	return <></>;
+}
+
 export default function TextInput(props: props): JSX.Element {
 	const [isFilled, setFilled] = useState(false);
+	const [hidden, setHidden] = useState(true);
 
 	const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
 		const value = event.target.value;
@@ -39,6 +61,10 @@ export default function TextInput(props: props): JSX.Element {
 		validate(value, props.type ?? 'text');
 		setFilled(value.length !== 0);
 		props.onChange(event, props.label);
+	};
+
+	const handleHidden = (): void => {
+		setHidden(!hidden);
 	};
 
 	const handleFocus = (event: FocusEvent<HTMLInputElement>): void => {
@@ -75,6 +101,14 @@ export default function TextInput(props: props): JSX.Element {
 		return clearError();
 	};
 
+	const getType = (): InputType => {
+		if (props.type !== 'password') return 'text';
+
+		if (!hidden) return 'text';
+
+		return 'password';
+	};
+
 	return (
 		<>
 			<div
@@ -88,11 +122,12 @@ export default function TextInput(props: props): JSX.Element {
 				<Icon Icon={props.Icon} />
 				<input
 					className='input'
-					type='text'
+					type={getType()}
 					onChange={handleChange}
 					onFocus={handleFocus}
 					onBlur={handleFocus}
 				/>
+				<ShowIcon type={props.type} hidden={hidden} onClick={handleHidden} />
 				<label className='label'>{props.label}</label>
 				<ErrorLabel error={props.error} />
 			</div>

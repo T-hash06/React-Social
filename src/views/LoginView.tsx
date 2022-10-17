@@ -45,6 +45,7 @@ export default function LoginView(): JSX.Element {
 						label='password'
 						onChange={handlePassword}
 						Icon={FaKey}
+						type='password'
 					/>
 				</section>
 				<section className='buttons-section'>
