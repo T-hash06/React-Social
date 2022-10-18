@@ -22,7 +22,7 @@
 	.icon {
 		color: var(--border-color);
 		font-size: var(--icon-size);
-		width: calc(var(--icon-size) * 2);
+		min-width: calc(var(--icon-size) * 2);
 
 		transition-duration: 200ms;
 	}
@@ -84,12 +84,29 @@
 		align-items: center;
 
 		color: var(--border-color);
-		background-color: var(--back-color);
+		background-color: transparent;
+
+		position: relative;
+
+		.slash {
+			position: absolute;
+
+			width: 0px;
+			height: 6px;
+			background: linear-gradient(var(--border-color) 50%, var(--back-color) 50%);
+
+			transform: rotate(45deg);
+			transition-duration: 200ms;
+		}
+	}
+
+	.hidden .slash {
+		width: 60%;
 	}
 
 	&.iconned {
 		.label {
-			left: calc(var(--icon-size) * 2);
+			left: calc(var(--icon-size) * 2.3);
 		}
 
 		.input {
@@ -112,6 +129,14 @@
 		.icon {
 			color: var(--error);
 		}
+
+		.eye-icon {
+			color: var(--error);
+
+			.slash {
+				background: linear-gradient(var(--error) 50%, var(--back-color) 50%);
+			}
+		}
 	}
 
 	&:focus-within {
@@ -119,6 +144,14 @@
 
 		.icon {
 			color: var(--active-color);
+		}
+
+		.eye-icon {
+			color: var(--active-color);
+
+			.slash {
+				background: linear-gradient(var(--active-color) 50%, var(--back-color) 50%);
+			}
 		}
 
 		.label {
@@ -135,6 +168,14 @@
 			.label,
 			.icon {
 				color: var(--error);
+			}
+
+			.eye-icon {
+				color: var(--error);
+
+				.slash {
+					background: linear-gradient(var(--error) 50%, var(--back-color) 50%);
+				}
 			}
 		}
 	}

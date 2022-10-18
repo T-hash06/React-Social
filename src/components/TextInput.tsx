@@ -2,7 +2,7 @@ import '../styles/ui/TextInput.css';
 
 import { ChangeEvent, FocusEvent, useState } from 'react';
 import { IconType } from 'react-icons';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye } from 'react-icons/fa';
 
 import classnames from 'classnames';
 
@@ -43,7 +43,8 @@ function ShowIcon({ type, hidden, onClick }: ShowIconProps): JSX.Element {
 		return (
 			<>
 				<button className={classnames('eye-icon', { hidden })} onClick={onClick}>
-					{hidden ? <FaEyeSlash /> : <FaEye />}
+					<FaEye />
+					<span className='slash'></span>
 				</button>
 			</>
 		);
