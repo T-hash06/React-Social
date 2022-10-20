@@ -1,3 +1,5 @@
+import '../styles/views/HomeView.css';
+
 import { useStore } from '@nanostores/react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +19,9 @@ export default function HomeView(): JSX.Element {
 
 	return (
 		<>
-			<h1>Hello from Home!</h1>
+			<div id='home-container'>
+				<h1>Hello from Home!</h1>
+			</div>
 		</>
 	);
 }

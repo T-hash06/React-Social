@@ -1,15 +1,14 @@
 import '../styles/views/RegisterView.css';
 
 import { FaKey, FaEnvelope, FaRegAddressCard, FaUser } from 'react-icons/fa';
+import { FetchClient, HttpStatus } from '../hooks/useFetch';
+import { spawnNotification } from '../stores/Notification';
 import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import axios, { AxiosError } from 'axios';
-
+import Title from '../components/Title';
 import TextInput from '../components/TextInput';
 import Button from '../components/Button';
-import Title from '../components/Title';
-import { spawnNotification } from '../stores/Notification';
 
 interface inputs {
 	name: string;
@@ -34,12 +33,15 @@ export default function RegisterView(): JSX.Element {
 	});
 	const navigate = useNavigate();
 
-	const handleChanges = (event: ChangeEvent<HTMLInputElement>, label: string = ''): void => {
+	const handleChanges = (event: ChangeEvent<HTMLInputElement>, label?: string): void => {
+		if (label === undefined) return;
+
 		const newInputs = { ...values, [label]: event.target.value };
 		setValues(newInputs);
 	};
 
-	const handleErrors = (error: string, label: string = ''): void => {
+	const handleErrors = (error: string, label?: string): void => {
+		if (label === undefined) return;
 		setErrors({ ...errors, [label]: error });
 	};
 
@@ -57,32 +59,32 @@ export default function RegisterView(): JSX.Element {
 	};
 
 	const createUser = async (): Promise<void> => {
-		const API = import.meta.env.VITE_API_URL;
+		const client = new FetchClient<undefined>();
 
-		try {
-			await axios.post(`${API}/users`, values);
+		const query = client.post('users', values);
 
+		query.addErrorHandler(HttpStatus.UNKNOWN, (_) => {
+			spawnNotification('Server error');
+		});
+
+		query.addErrorHandler(HttpStatus.CONFLICT, (error) => {
+			const conflictFields = error.data as string[];
+			const mapErrors = new Map();
+
+			conflictFields.forEach((field) => {
+				mapErrors.set(field, 'Already exists!');
+			});
+
+			const newErrors = Object.fromEntries(mapErrors);
+			setErrors({ ...errors, ...newErrors });
+		});
+
+		query.addSuccessHandler((_) => {
 			spawnNotification(`User ${values.username} created!`);
 			navigate('/login');
-		} catch (error: any) {
-			const axiosError: AxiosError = error;
+		});
 
-			if (axiosError.response === undefined) return;
-
-			if (axiosError.response.status === 409) {
-				const conflictFields = axiosError.response.data as string[];
-				const mapErrors = new Map();
-
-				conflictFields.forEach((field) => {
-					mapErrors.set(field, 'Already exists!');
-				});
-
-				const newErrors = Object.fromEntries(mapErrors);
-				setErrors({ ...errors, ...newErrors });
-			}
-
-			spawnNotification('Server error');
-		}
+		void (await query.resolve());
 	};
 
 	const checkEmpty = (): boolean => {
@@ -91,7 +93,7 @@ export default function RegisterView(): JSX.Element {
 
 		mapValues.forEach((value, key) => {
 			if (value === '') {
-				emptyValues.set(key, 'Required Fields!');
+				emptyValues.set(key, 'Required Field!');
 			}
 		});
 
