@@ -13,7 +13,6 @@ export default function HomeView(): JSX.Element {
 	useEffect(() => {
 		if (!auth) {
 			navigate('/login');
-			console.log('Hola');
 		}
 	}, [auth]);
 

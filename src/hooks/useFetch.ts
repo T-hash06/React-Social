@@ -31,6 +31,11 @@ type HttpStatusType = typeof HttpStatus[keyof typeof HttpStatus];
 type HttpErrorStatusType = typeof HttpErrorStatus[keyof typeof HttpErrorStatus];
 type HttpMethodsType = typeof HttpMethods[keyof typeof HttpMethods];
 
+export interface FetchConfig {
+	apiUrl?: string;
+	acessToken?: string;
+}
+
 class FetchQuery<T> {
 	client: AxiosInstance;
 	resource: collection;
@@ -102,15 +107,22 @@ class FetchQuery<T> {
 export class FetchClient<T> {
 	client: AxiosInstance;
 	API: string;
+	acessToken?: string;
 
-	constructor() {
-		this.API = import.meta.env.VITE_API_URL;
+	constructor(config?: FetchConfig) {
+		config ??= {};
 
-		this.client = axios.create({ baseURL: this.API });
+		this.API = config.acessToken ?? import.meta.env.VITE_API_URL ?? '0.0.0.0';
+		this.acessToken = config.acessToken ?? localStorage.getItem('acessToken') ?? '';
+
+		this.client = axios.create({
+			baseURL: this.API,
+			headers: { Authorization: `Bearer ${this.acessToken}` },
+		});
 	}
 
-	get(resource: collection): FetchQuery<T> {
-		return new FetchQuery<T>(this.client, HttpMethods.GET, resource);
+	get(resource: collection, config?: AxiosRequestConfig): FetchQuery<T> {
+		return new FetchQuery<T>(this.client, HttpMethods.GET, resource, undefined, config);
 	}
 
 	post(
@@ -121,7 +133,7 @@ export class FetchClient<T> {
 		return new FetchQuery<T>(this.client, HttpMethods.POST, resource, data, config);
 	}
 
-	delete(resource: collection): FetchQuery<T> {
-		return new FetchQuery<T>(this.client, HttpMethods.DELETE, resource);
+	delete(resource: collection, config?: AxiosRequestConfig): FetchQuery<T> {
+		return new FetchQuery<T>(this.client, HttpMethods.DELETE, resource, undefined, config);
 	}
 }
