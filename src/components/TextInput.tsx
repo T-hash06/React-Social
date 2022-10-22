@@ -1,6 +1,6 @@
 import '../styles/ui/TextInput.css';
 
-import { ChangeEvent, FocusEvent, useState } from 'react';
+import { ChangeEvent, FocusEvent, KeyboardEvent, useState } from 'react';
 import { IconType } from 'react-icons';
 import { FaEye } from 'react-icons/fa';
 
@@ -10,13 +10,15 @@ type InputType = 'text' | 'password' | 'email';
 type FocusType = 'focus' | 'blur';
 
 interface props {
-	onChange: (event: ChangeEvent<HTMLInputElement>, label?: string) => void;
-	setError?: (error: string, label: string) => void;
-	className?: string;
+	onChange: (event: ChangeEvent<HTMLInputElement>, label: string) => void;
+	label: string;
 	error?: string;
 	Icon?: IconType;
 	type?: InputType;
-	label: string;
+	validate?: boolean;
+	className?: string;
+	setError?: (error: string, label: string) => void;
+	onEnter?: () => void;
 }
 
 interface ShowIconProps {
@@ -56,11 +58,19 @@ export default function TextInput(props: props): JSX.Element {
 	const [isFilled, setFilled] = useState(false);
 	const [hidden, setHidden] = useState(true);
 
+	const handleSubmit = (event: KeyboardEvent<HTMLInputElement>): void => {
+		if (event.key !== 'Enter' || props.onEnter === undefined) return;
+
+		props.onEnter();
+	};
+
 	const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
 		const value = event.target.value;
 
-		validate(value, props.type ?? 'text');
+		validate(value, props.type, props.validate);
+
 		setFilled(value.length !== 0);
+
 		props.onChange(event, props.label);
 	};
 
@@ -75,7 +85,7 @@ export default function TextInput(props: props): JSX.Element {
 		if (focusType === 'focus') {
 			clearError();
 		} else {
-			validate(value, props.type ?? 'text');
+			validate(value, props.type, props.validate);
 		}
 	};
 
@@ -83,7 +93,12 @@ export default function TextInput(props: props): JSX.Element {
 		if (props.setError !== undefined) props.setError('', props.label);
 	};
 
-	const validate = (value: string, type: InputType): void => {
+	const validate = (
+		value: string,
+		type: InputType = 'text',
+		canValidate: boolean = true
+	): void => {
+		if (!canValidate) return clearError();
 		if (type === 'text' || props.setError === undefined) return;
 		if (value.length === 0) return clearError();
 
@@ -115,9 +130,9 @@ export default function TextInput(props: props): JSX.Element {
 			<div
 				className={classnames('input-container', {
 					filled: isFilled,
-					iconned: props.Icon !== undefined,
 					error: props.error,
 					[props.className ?? '']: true,
+					iconned: props.Icon !== undefined,
 				})}
 			>
 				<Icon Icon={props.Icon} />
@@ -127,6 +142,7 @@ export default function TextInput(props: props): JSX.Element {
 					onChange={handleChange}
 					onFocus={handleFocus}
 					onBlur={handleFocus}
+					onKeyDown={handleSubmit}
 				/>
 				<ShowIcon type={props.type} hidden={hidden} onClick={handleHidden} />
 				<label className='label'>{props.label}</label>

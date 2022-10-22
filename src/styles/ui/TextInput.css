@@ -87,6 +87,7 @@
 		background-color: transparent;
 
 		position: relative;
+		cursor: pointer;
 
 		.slash {
 			position: absolute;

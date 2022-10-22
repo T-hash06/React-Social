@@ -122,11 +122,13 @@ export default function LoginView(): JSX.Element {
 					<TextInput
 						className='text-input'
 						label='password'
-						onChange={handleInputChange}
-						Icon={FaKey}
 						type='password'
+						Icon={FaKey}
 						error={errors.password}
+						onEnter={handleLogin}
 						setError={handleErrors}
+						onChange={handleInputChange}
+						validate={false}
 					/>
 				</section>
 				<section className='buttons-section'>

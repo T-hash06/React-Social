@@ -127,38 +127,39 @@ export default function RegisterView(): JSX.Element {
 				<Title>Register</Title>
 				<section className='inputs-container'>
 					<TextInput
-						onChange={handleChanges}
 						label='name'
 						className='text-input'
-						Icon={FaRegAddressCard}
 						error={errors.name}
+						Icon={FaRegAddressCard}
 						setError={handleErrors}
+						onChange={handleChanges}
 					/>
 					<TextInput
-						onChange={handleChanges}
 						label='email'
+						type='email'
 						className='text-input'
 						Icon={FaEnvelope}
 						error={errors.email}
 						setError={handleErrors}
-						type='email'
+						onChange={handleChanges}
 					/>
 					<TextInput
-						onChange={handleChanges}
 						label='username'
 						className='text-input'
 						Icon={FaUser}
 						error={errors.username}
 						setError={handleErrors}
+						onChange={handleChanges}
 					/>
 					<TextInput
-						onChange={handleChanges}
 						label='password'
+						type='password'
 						className='text-input'
 						Icon={FaKey}
 						error={errors.password}
 						setError={handleErrors}
-						type='password'
+						onChange={handleChanges}
+						onEnter={handleRegister}
 					/>
 				</section>
 				<section className='buttons-container'>
