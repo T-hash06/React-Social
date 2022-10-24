@@ -56,5 +56,9 @@ body {
 	align-items: center;
 
 	min-width: 100vw;
-	min-height: 100vh;
+	height: calc(var(--vh) * 100);
+}
+
+#root {
+	height: 100%;
 }

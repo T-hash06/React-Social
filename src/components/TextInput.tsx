@@ -44,7 +44,11 @@ function ShowIcon({ type, hidden, onClick }: ShowIconProps): JSX.Element {
 	if (type === 'password')
 		return (
 			<>
-				<button className={classnames('eye-icon', { hidden })} onClick={onClick}>
+				<button
+					className={classnames('eye-icon', { hidden })}
+					onClick={onClick}
+					tabIndex={-1}
+				>
 					<FaEye />
 					<span className='slash'></span>
 				</button>

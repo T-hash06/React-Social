@@ -5,7 +5,7 @@
 	height: 100%;
 
 	display: grid;
-	grid-template-rows: var(--title-height) auto 250px;
+	grid-template-rows: var(--title-height) min-content auto;
 
 	.inputs-container {
 		display: flex;
@@ -20,13 +20,15 @@
 	}
 
 	.buttons-container {
+		margin-top: calc(var(--buttons-height) * 1.5);
+
 		display: flex;
 		flex-wrap: wrap;
 
 		justify-content: center;
-		align-content: center;
+		align-content: flex-start;
 
-		gap: 20px;
+		gap: 30px;
 		.button {
 			width: 70%;
 		}

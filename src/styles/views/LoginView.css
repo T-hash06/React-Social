@@ -3,7 +3,7 @@
 	height: 100%;
 
 	display: grid;
-	grid-template-rows: var(--title-height) min-content 450px;
+	grid-template-rows: var(--title-height) min-content auto;
 
 	.inputs-section {
 		display: flex;
@@ -19,18 +19,20 @@
 	}
 
 	.buttons-section {
-		align-self: center;
+		align-self: flex-start;
 
 		display: flex;
 		flex-wrap: wrap;
 
 		justify-content: center;
-		align-content: flex-start;
+		align-content: center;
 
+		margin-top: var(--buttons-height);
+
+		gap: 30px;
 		.rect-button {
 			--back-color: var(--white);
 
-			margin-top: 30px;
 			width: 70%;
 		}
 	}
